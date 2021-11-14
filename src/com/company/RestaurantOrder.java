@@ -1,12 +1,9 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
-public class InternetOrder implements Order{
-    private CloseLinkedList<Item> dishes = new CloseLinkedList<>();
+public class RestaurantOrder implements Order{
+    private ArrayList<Item> dishes = new ArrayList<>();
     private int size = 0;
     private Item head;
     @Override
@@ -27,9 +24,7 @@ public class InternetOrder implements Order{
     }
     @Override
     public void removeAll(String dishName){
-        for (Item i : dishes)
-            if (i.getName().equals(dishName))
-                dishes.remove(i);
+        dishes.removeIf(i -> i.getName().equals(dishName));
     }
     @Override
     public void readDish(){
@@ -53,7 +48,9 @@ public class InternetOrder implements Order{
     }
     @Override
     public CloseLinkedList<Item> getDishes(){
-        return dishes;
+        CloseLinkedList<Item> returned = new CloseLinkedList<Item>();
+        returned.addAll(dishes);
+        return returned;
     }
     @Override
     public double costTotal(){
@@ -73,7 +70,8 @@ public class InternetOrder implements Order{
     }
     @Override
     public CloseLinkedList<Item> sortedDishesByCostD(){
-        CloseLinkedList<Item> sorted = dishes;
+        CloseLinkedList<Item> sorted = new CloseLinkedList<>();
+        sorted.addAll(dishes);
         sorted.sort(Comparator.comparing(Item::getPrice));
         CloseLinkedList<Item> reversed = new CloseLinkedList<>();
         for(Item i : dishes){

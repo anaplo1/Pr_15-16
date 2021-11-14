@@ -3,7 +3,7 @@ package com.company;
 import java.util.ArrayList;
 
 public class OrderManager {
-    ArrayList<Order> orders = new ArrayList<>();
+    ArrayList<Order> restaurantOrders = new ArrayList<>();
     boolean[] tableFreeArray; //Предположим что столов 20
     public OrderManager(int tableQuantity){
         tableFreeArray = new boolean[tableQuantity];
@@ -11,18 +11,18 @@ public class OrderManager {
             tableFreeArray[i] = false;
         }
     }
-    public void add(Order order, int tableNumber){
-        orders.add(tableNumber, order);
+    public void add(Order restaurantOrder, int tableNumber){
+        restaurantOrders.add(tableNumber, restaurantOrder);
         tableFreeArray[tableNumber] = true;
     }
     public Order getOrder(int tableNumber){
-        return orders.get(tableNumber);
+        return restaurantOrders.get(tableNumber);
     }
     public void addDish(Item dish, int tableNumber){
-        orders.get(tableNumber).add(dish);
+        restaurantOrders.get(tableNumber).add(dish);
     }
     public void removeOrder(int tableNumber){
-        orders.remove(tableNumber);
+        restaurantOrders.remove(tableNumber);
         tableFreeArray[tableNumber] = false;
     }
     public int freeTableNumber(){
@@ -50,25 +50,25 @@ public class OrderManager {
         return number;
     }
     public ArrayList<Order> getOrders(){
-        return orders;
+        return restaurantOrders;
     }
     public double orderCostSummary(){
         double cost = 0;
-        for (Order i : orders){
+        for (Order i : restaurantOrders){
             cost += i.costTotal();
         }
         return cost;
     }
     public int dishQuantity(String dishName){
         int count = 0;
-        for (Order i : orders){
+        for (Order i : restaurantOrders){
             count += i.dishQuantity(dishName);
         }
         return count;
     }
     public void readOrder(){
         System.out.print("\n");
-        for (Order i : orders){
+        for (Order i : restaurantOrders){
            i.readDish();
         }
     }

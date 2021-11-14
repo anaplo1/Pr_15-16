@@ -5,13 +5,13 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        InternetOrder A = new InternetOrder();
+        Order A = new InternetOrder();
         Dish d1 = new Dish("Горденблю", "Лучшее блюдо на планете земля!", 2);
         Dish d2 = new Dish("Ростбиф", "Лучшее блюдо на планете земля!", 4);
         Dish d3 = new Dish("карнишон", "Лучшее блюдо на планете земля!", 0);
         Drink drink = new Drink("Пинакалада","Лучший напиток на планете хемля!",7);
 
-        InternetOrder B = new InternetOrder();
+        Order B = new RestaurantOrder();
         Dish d4 = new Dish("Абрикос", "Лучшее блюдо на планете земля!", 3);
         Dish d5 = new Dish("Рататуй", "Лучшее блюдо на планете земля!", 2);
         Dish d6 = new Dish("Стейк", "Лучшее блюдо на планете земля!", 1);
@@ -33,7 +33,6 @@ public class Main {
             System.out.println(i.getName()+" "+i.getDiscription()+" "+i.getPrice());
         }
         OrderManager orderManager = new OrderManager(20);
-        /*
         orderManager.add(A,0);
         orderManager.add(B,1);
         orderManager.add(B,2);
@@ -51,6 +50,5 @@ public class Main {
         System.out.println("\nЦена всех заказов: "+orderManager.orderCostSummary());
         System.out.println("\nКоличество заказов типа карнишон: "+orderManager.dishQuantity("карнишон"));
 
-         */
     }
 }
