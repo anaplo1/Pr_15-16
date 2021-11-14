@@ -1,9 +1,11 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class OrderManager {
     ArrayList<Order> restaurantOrders = new ArrayList<>();
+    HashMap<String,Order> adressedOrders = new HashMap<>();
     boolean[] tableFreeArray; //Предположим что столов 20
     public OrderManager(int tableQuantity){
         tableFreeArray = new boolean[tableQuantity];
@@ -15,15 +17,23 @@ public class OrderManager {
         restaurantOrders.add(tableNumber, restaurantOrder);
         tableFreeArray[tableNumber] = true;
     }
+    public void add(String address, Order order){
+        adressedOrders.put(address,order);
+    }
     public Order getOrder(int tableNumber){
         return restaurantOrders.get(tableNumber);
     }
+    public Order getOrder(String address){return adressedOrders.get(address);}
     public void addDish(Item dish, int tableNumber){
         restaurantOrders.get(tableNumber).add(dish);
     }
+    public void addDish(Item dish, String address){adressedOrders.get(address).add(dish);}
     public void removeOrder(int tableNumber){
         restaurantOrders.remove(tableNumber);
         tableFreeArray[tableNumber] = false;
+    }
+    public void removeOrder(String address){
+        adressedOrders.remove(address);
     }
     public int freeTableNumber(){
         int numb =0;
@@ -52,12 +62,27 @@ public class OrderManager {
     public ArrayList<Order> getOrders(){
         return restaurantOrders;
     }
+    public HashMap<String,Order> getAddressedOrders() {return adressedOrders;}
     public double orderCostSummary(){
         double cost = 0;
         for (Order i : restaurantOrders){
             cost += i.costTotal();
         }
         return cost;
+    }
+    public double addressedOrderCostSummary(){
+        double cost =0;
+        for (String i : adressedOrders.keySet()){
+            cost += adressedOrders.get(i).costTotal();
+        }
+        return cost;
+    }
+    public int addressedDishQuantity(String dishName){
+        int count =0;
+        for (String i : adressedOrders.keySet()){
+            count += adressedOrders.get(i).dishQuantity(dishName);
+        }
+        return count;
     }
     public int dishQuantity(String dishName){
         int count = 0;
