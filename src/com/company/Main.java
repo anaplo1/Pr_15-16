@@ -42,6 +42,9 @@ public class Main {
 
         System.out.print("\nВывод внесенных онлайн заказов: ");
         HashMap<String,Order> read = orderManager.getAddressedOrders();
+        for (String i : read.keySet()){
+            read.get(i).readDish();
+        }
         orderManager.readAddressedOrders();
         System.out.println("\nНомер ближайшего свободного стола: "+orderManager.freeTableNumber());
         System.out.print("Список свободных столов: ");
