@@ -91,10 +91,18 @@ public class OrderManager {
         }
         return count;
     }
-    public void readOrder(){
+    public void readOrders(){
         System.out.print("\n");
         for (Order i : restaurantOrders){
-           i.readDish();
+            System.out.print("\nЗаказ стола №"+(restaurantOrders.indexOf(i)+1)+": ");
+            i.readDish();
+        }
+    }
+    public void readAddressedOrders(){
+        System.out.print("\n");
+        for (String i : adressedOrders.keySet()){
+            System.out.print("\nЗаказ №"+(restaurantOrders.indexOf(i)+2)+": ");
+            adressedOrders.get(i).readDish();
         }
     }
 }
