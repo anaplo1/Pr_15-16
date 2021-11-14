@@ -13,16 +13,19 @@ public class Main {
         Dish d5 = new Dish("Рататуй", "Лучшее блюдо на планете земля!", 2);
         Dish d6 = new Dish("Стейк", "Лучшее блюдо на планете земля!", 1);
 
+        Drink drink = new Drink("Пинакалада","Лучший напиток на планете хемля!",7);
+
         A.add(d1);
         A.add(d2);
+        A.add(drink);
         A.add(d3);
         A.add(d4);
         A.add(d5);
         A.add(d6);
         A.readDish();
         System.out.print("\n");
-        List<Dish> sorted = A.sortedDishesByCostD();
-        for (Dish i : sorted){
+        List<Item> sorted = A.sortedDishesByCostD();
+        for (Item i : sorted){
             System.out.println(i.getName()+" "+i.getDiscription()+" "+i.getPrice());
         }
     }
