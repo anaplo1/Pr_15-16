@@ -4,8 +4,16 @@ import java.util.ArrayList;
 
 public class OrderManager {
     ArrayList<Order> orders = new ArrayList<>();
+    boolean[] tableFreeArray; //Предположим что столов 20
+    public OrderManager(int tableQuantity){
+        tableFreeArray = new boolean[tableQuantity];
+        for (int i =0;i<tableQuantity;i++){
+            tableFreeArray[i] = false;
+        }
+    }
     public void add(Order order, int tableNumber){
         orders.add(tableNumber, order);
+        tableFreeArray[tableNumber] = true;
     }
     public Order getOrder(int tableNumber){
         return orders.get(tableNumber);
@@ -15,33 +23,31 @@ public class OrderManager {
     }
     public void removeOrder(int tableNumber){
         orders.remove(tableNumber);
+        tableFreeArray[tableNumber] = false;
     }
     public int freeTableNumber(){
         int numb =0;
-        for (Order i : orders){
-            numb++;
-            if (i==null)
+        for (int i =0;i<tableFreeArray.length;i++){
+            if (!tableFreeArray[i]){
+                numb = i;
                 return numb;
+            }
         }
         return -1;
     }
     public int[] freeTableNumbers(){
-        int[] numbArray = new int[20]; //Предположим что столов 20
-        int count = 0;
-        for (int i =0;i<numbArray.length;i++){
-            numbArray[i] =0;
-        }
-        for (Order i : orders){
-            numbArray[orders.indexOf(i)] = 1;
-        }
-        int[] tablesNumberArray = new int[orders.size()];
-        for (int i=0;i<20;i++){
-            if (numbArray[i] == 1) {
-                tablesNumberArray[count] = i;
+        int size = 0;
+        for (int i =0;i<tableFreeArray.length;i++)
+            if (!tableFreeArray[i])
+                size++;
+        int[] number = new int[size];
+        int count =0;
+        for (int i =0;i<tableFreeArray.length;i++)
+            if (!tableFreeArray[i]) {
+                number[count] = i;
                 count++;
             }
-        }
-        return tablesNumberArray;
+        return number;
     }
     public ArrayList<Order> getOrders(){
         return orders;
@@ -59,5 +65,11 @@ public class OrderManager {
             count += i.dishQuantity(dishName);
         }
         return count;
+    }
+    public void readOrder(){
+        System.out.print("\n");
+        for (Order i : orders){
+           i.readDish();
+        }
     }
 }
