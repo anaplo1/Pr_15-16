@@ -13,18 +13,25 @@ public class OrderManager {
             tableFreeArray[i] = false;
         }
     }
-    public void add(Order restaurantOrder, int tableNumber){
+    public void add(Order restaurantOrder, int tableNumber) throws OrderAlreadyAddedException, IllegalTableNumber{
+        if (tableNumber<0 || tableNumber>19)
+            throw new IllegalTableNumber("Столика с таким номером не существует");
+        if (tableFreeArray[tableNumber])
+            throw new OrderAlreadyAddedException("Со столика уже был сделан заказ");
         restaurantOrders.add(tableNumber, restaurantOrder);
         tableFreeArray[tableNumber] = true;
     }
     public void add(String address, Order order){
         adressedOrders.put(address,order);
     }
-    public Order getOrder(int tableNumber){
-        return restaurantOrders.get(tableNumber);
+    public Order getOrder(int tableNumber) throws IllegalTableNumber{
+        if (tableNumber<0 || tableNumber>19)
+            throw new IllegalTableNumber("Столика с таким номером не существует");return restaurantOrders.get(tableNumber);
     }
     public Order getOrder(String address){return adressedOrders.get(address);}
-    public void addDish(Item dish, int tableNumber){
+    public void addDish(Item dish, int tableNumber) throws IllegalTableNumber{
+        if (tableNumber<0 || tableNumber>19)
+            throw new IllegalTableNumber("Столика с таким номером не существует");
         restaurantOrders.get(tableNumber).add(dish);
     }
     public void addDish(Item dish, String address){adressedOrders.get(address).add(dish);}
