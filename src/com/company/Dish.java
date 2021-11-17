@@ -11,7 +11,7 @@ public class Dish implements Item{
         this.price = 0;
         if (price < 0)
             throw new IllegalArgumentException("Цена блюда не может быть отрицательной");
-        if (name.equals(""))
+        if (name.isEmpty())
             throw new IllegalArgumentException("Имя блюда не может быть пустым");
         if (discription.isEmpty())
             throw new IllegalArgumentException("Описание блюда не может быть пустым");
@@ -22,7 +22,7 @@ public class Dish implements Item{
         this.price = price;
         if (price < 0)
             throw new IllegalArgumentException("Цена блюда не может быть отрицательной");
-        if (name.equals(""))
+        if (name.isEmpty())
             throw new IllegalArgumentException("Имя блюда не может быть пустым");
         if (discription.isEmpty())
             throw new IllegalArgumentException("Описание блюда не может быть пустым");

@@ -8,6 +8,7 @@ import java.util.List;
 public class InternetOrder implements Order{
     private CloseLinkedList<Item> dishes = new CloseLinkedList<>();
     private int size = 0;
+    private Customer customer;
     private Item head;
     @Override
     public boolean add(Item dish){
@@ -26,9 +27,23 @@ public class InternetOrder implements Order{
         return false;
     }
     @Override
+    public boolean remove(Item dish){
+        for (Item i : dishes){
+            if (i.getName().equals(dish.getName()))
+                return dishes.remove(i);
+        }
+        return false;
+    }
+    @Override
     public void removeAll(String dishName){
         for (Item i : dishes)
             if (i.getName().equals(dishName))
+                dishes.remove(i);
+    }
+    @Override
+    public void removeAll(Item dish){
+        for (Item i : dishes)
+            if (i.getName().equals(dish.getName()))
                 dishes.remove(i);
     }
     @Override
@@ -41,6 +56,15 @@ public class InternetOrder implements Order{
     @Override
     public int dishQuantity(){
         return size;
+    }
+    @Override
+    public int dishQuantity(Item dish){
+        int count = 0;
+        for (Item i : dishes){
+            if (i.getName().equals(dish.getName()))
+                count++;
+        }
+        return count;
     }
     @Override
     public int dishQuantity(String dishName){
@@ -80,5 +104,13 @@ public class InternetOrder implements Order{
             reversed.addFirst(i);
         }
         return reversed;
+    }
+    @Override
+    public void setCustomer(Customer customer){
+        this.customer = customer;
+    }
+    @Override
+    public Customer getCustomer(){
+        return customer;
     }
 }

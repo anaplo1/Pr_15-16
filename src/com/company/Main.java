@@ -2,6 +2,8 @@ package com.company;
 
 import java.util.HashMap;
 
+import static com.company.DrinkTypeEnum.*;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -10,7 +12,7 @@ public class Main {
         Dish d1 = new Dish("Горденблю", "Лучшее блюдо на планете земля!", 2);
         Dish d2 = new Dish("Ростбиф", "Лучшее блюдо на планете земля!", 4);
         Dish d3 = new Dish("карнишон", "Лучшее блюдо на планете земля!", 0);
-        Drink drink = new Drink("Пинакалада","Лучший напиток на планете хемля!",7);
+        Drink drink = new Drink("Пинакалада","Лучший напиток на планете хемля!",7, LIQUOR);
 
         Order B = new RestaurantOrder();
         Dish d4 = new Dish("Абрикос", "Лучшее блюдо на планете земля!", 3);
@@ -18,9 +20,10 @@ public class Main {
         Dish d6 = new Dish("Стейк", "Лучшее блюдо на планете земля!", 1);
 
         Order C = new RestaurantOrder();
-            Drink VODKA = new Drink("Водка","Нектар богов!",21);
-            Drink PIVO = new Drink("Пиво","Нектар богов!",11);
-            Drink CHAI = new Drink("Чай","Вкусной напиток, веющий английским калоритом!",10);
+            Drink VoDKA = new Drink("Водка","Нектар богов!",21, VODKA);
+            Drink PIVO = new Drink("Пиво","Нектар богов!",11, BEER);
+            Drink PIVO1 = new Drink("Пиво","Нектар богов!",11, BEER);
+            Drink CHAI = new Drink("Чай","Вкусной напиток, веющий английским калоритом!",10, BLACK_TEA);
             A.add(d1);
             A.add(d2);
             A.add(drink);
@@ -28,26 +31,28 @@ public class Main {
             B.add(d4);
             B.add(d5);
             B.add(d6);
-            C.add(VODKA);
+            C.add(VoDKA);
             C.add(PIVO);
+            C.add(PIVO1);
             C.add(CHAI);
             A.remove("Горденблю");
             CloseLinkedList<Item> sorted = A.sortedDishesByCostD();
-            OrderManager orderManager = new OrderManager(20);
+            TableOrdersManager orderManager = new TableOrdersManager(20);
+            InternetOrdersManager internetOrdersManager = new InternetOrdersManager();
                 orderManager.add(A, 0);
                 orderManager.add(B, 1);
                 orderManager.add(B, 2);
-            orderManager.add("ул. Братеевская д.21",C);
+            internetOrdersManager.add("ул. Братеевская д.21",C);
                 orderManager.removeOrder(1);
             System.out.print("\nВывод внесенных заказов в ресторане: ");
             orderManager.readOrders();
 
             System.out.print("\nВывод внесенных онлайн заказов: ");
-            HashMap<String,Order> read = orderManager.getAddressedOrders();
+            HashMap<String,Order> read = internetOrdersManager.getOrders();
             for (String i : read.keySet()){ //Есть возможность разлиновать все по списку объектов и вывести его вручную
                 read.get(i).readDish();
             }
-            orderManager.readAddressedOrders();
+            internetOrdersManager.readAddressedOrders();
             System.out.println("\nНомер ближайшего свободного стола: "+orderManager.freeTableNumber());
             System.out.print("Список свободных столов: ");
             int[] a = orderManager.freeTableNumbers();
@@ -55,10 +60,10 @@ public class Main {
                 System.out.print(a[i]+" ");
             }
 
-            System.out.println("\n\nЦена всех заказов в ресторане: "+orderManager.orderCostSummary());
-            System.out.println("\nЦена всех онлайн закакзов: "+orderManager.addressedOrderCostSummary());
+            System.out.println("\n\nЦена всех заказов в ресторане: "+orderManager.ordersCostSummary());
+            System.out.println("\nЦена всех онлайн закакзов: "+internetOrdersManager.ordersCostSummary());
             System.out.println("\nКоличество заказов типа карнишон: "+orderManager.dishQuantity("карнишон"));
-            System.out.println("\nКоличество заказов типа Пиво: "+orderManager.addressedDishQuantity("Пиво"));
+            System.out.println("\nКоличество заказов типа Пиво: "+internetOrdersManager.dishQuantity("Пиво"));
 
             orderManager.getOrder(0).readDish();
         }
