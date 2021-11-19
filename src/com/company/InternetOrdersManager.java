@@ -41,11 +41,14 @@ public class InternetOrdersManager implements OrdersManager{
     public int ordersQuantity(){
         return adressedOrders.size();
     }
-    public void readAddressedOrders(){
+    public String readAddressedOrders(){
         System.out.print("\n");
+        String message = "";
         for (Customer i : adressedOrders.keySet()){
             System.out.print("\nИнтернет заказ: ");
             adressedOrders.get(i).readDish();
+            message += adressedOrders.get(i).dishesName() +"\n";
         }
+        return message;
     }
 }

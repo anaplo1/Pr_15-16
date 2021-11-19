@@ -17,7 +17,7 @@ public class GUI extends JFrame {
     protected InternetOrdersManager internetOrdersManager = new InternetOrdersManager();
 
     public GUI(){
-        this.setBounds(100,100,500,150);
+        this.setBounds(100,100,500,185);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Основное окно выбора");
 
@@ -61,6 +61,8 @@ public class GUI extends JFrame {
 
     class ButtonEvent3 implements ActionListener{
         public void actionPerformed(ActionEvent e){
+            JOptionPane.showMessageDialog(null,internetOrdersManager.readAddressedOrders()+"\n"+tableOrdersManager.readOrders(),"Список заказов", JOptionPane.PLAIN_MESSAGE);
+            //JOptionPane.showMessageDialog(null, );
         }
     }
 
@@ -341,7 +343,7 @@ public class GUI extends JFrame {
                 }
                 class ButtonEvent4 implements ActionListener{
                     public void actionPerformed(ActionEvent e){
-                        Dish dish = new Dish(dishName.getText(), dishName.getText(), Integer.parseInt(dishPrice.getText()));
+                        Dish dish = new Dish(dishName.getText(), dishDiscription.getText(), Integer.parseInt(dishPrice.getText()));
                         JOptionPane.showMessageDialog(null,"Данные напитка: "+dish.getName()+" "+dish.getDiscription()+" "+dish.getPrice()+"\n           Успешно внесены!","Успех!",JOptionPane.PLAIN_MESSAGE);
                         order.add(dish);
                     }
@@ -480,7 +482,7 @@ public class GUI extends JFrame {
         }
         class ButtonEvent4 implements ActionListener{
             public void actionPerformed(ActionEvent e){
-                Dish dish = new Dish(dishName.getText(), dishName.getText(), Integer.parseInt(dishPrice.getText()));
+                Dish dish = new Dish(dishName.getText(), dishDiscription.getText(), Integer.parseInt(dishPrice.getText()));
                 JOptionPane.showMessageDialog(null,"Данные напитка: "+dish.getName()+" "+dish.getDiscription()+" "+dish.getPrice()+"\n           Успешно внесены!","Успех!",JOptionPane.PLAIN_MESSAGE);
                 order.add(dish);
             }

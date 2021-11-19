@@ -92,11 +92,14 @@ public class TableOrdersManager implements OrdersManager{
         return count;
     }
 
-    public void readOrders(){
+    public String readOrders(){
         System.out.print("\n");
+        String message="";
         for (Order i : restaurantOrders){
             System.out.print("\nЗаказ стола №"+(restaurantOrders.indexOf(i)+1)+": ");
             i.readDish();
+            message += i.dishesName()+"\n";
         }
+        return message;
     }
 }

@@ -84,7 +84,7 @@ public class RestaurantOrder implements Order{
     }
     @Override
     public String dishesName(){
-        String list = "Список блюд:\n";
+        String list = "Ресторанный заказ:\n";
         for (Item i : dishes){
             list += i.getName()+"\n";
         }
