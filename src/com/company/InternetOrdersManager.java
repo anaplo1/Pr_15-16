@@ -9,7 +9,7 @@ public class InternetOrdersManager implements OrdersManager{
     }
     public Order getOrder(Customer address){return adressedOrders.get(address);}
     public void addDish(Item dish, Customer address){adressedOrders.get(address).add(dish);}
-    public void removeOrder(String address){
+    public void removeOrder(Customer address){
         adressedOrders.remove(address);
     }
     public HashMap<Customer,Order> getOrders() {return adressedOrders;}
