@@ -91,7 +91,7 @@ public class InternetOrder implements Order{
     public String dishesName(){
         String list = "Список блюд:\n";
         for (Item i : dishes){
-            list += i.getName()+"\n";
+            list += i.getName()+" "+i.getDiscription()+" "+i.getPrice()+"\n";
         }
         return list;
     }
